@@ -142,12 +142,11 @@ const style = `
     width:18px;
     height:2px;
     background:#fff;
-    margin:3px 0;
-    transition: transform 0.25s ease, opacity 0.2s ease;
+    margin:4px 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
   }
-  .hamburger.is-active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-  .hamburger.is-active .bar:nth-child(2) { opacity: 0; }
-  .hamburger.is-active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  /* Keep the icon as three horizontal bars when active */
+  .hamburger.is-active .bar { transform: none; opacity: 1; }
 
   .mobile-menu {
     display: none;
