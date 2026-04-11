@@ -138,12 +138,13 @@ const style = `
     cursor: pointer;
   }
   .hamburger .bar {
-    display:block;
-    width:18px;
-    height:2px;
-    background:#fff;
-    margin:4px 0;
-    transition: opacity 0.15s ease, transform 0.15s ease;
+    display: block;
+    width: 10px;
+    height: 2px;
+    background: #fff;
+    margin: 8px 0;
+    border-radius: 2px;
+    transition: opacity 0.12s ease, transform 0.12s ease;
   }
   /* Keep the icon as three horizontal bars when active */
   .hamburger.is-active .bar { transform: none; opacity: 1; }
