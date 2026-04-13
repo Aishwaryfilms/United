@@ -5,7 +5,9 @@
   "homepage": "https://Aishwaryfilms.github.io/code",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
+    "build:dist": "vite build && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
+    "build": "node scripts/publish-static.mjs",
+    "publish:static": "node scripts/publish-static.mjs",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
@@ -14,7 +16,8 @@
     "@supabase/supabase-js": "^2.103.0",
     "framer-motion": "^12.38.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.30.3"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
