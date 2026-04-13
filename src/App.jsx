@@ -12,6 +12,48 @@ const SOCIAL_LINKS = [
   { label: "YT", href: "https://www.youtube.com/@YOUeSportsCC", name: "YouTube" },
 ];
 
+const SECTION_IDS = ["home", "about", "roster", "creators", "shop", "contact"];
+
+const SocialIcon = ({ name }) => {
+  switch (name) {
+    case "Discord":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="social-icon">
+          <path
+            fill="currentColor"
+            d="M20.317 4.369a19.79 19.79 0 0 0-5.191-1.569 13.7 13.7 0 0 0-.666 1.35 18.42 18.42 0 0 0-5.919 0 13.3 13.3 0 0 0-.666-1.35A19.74 19.74 0 0 0 2.683 4.37C-.327 8.874-.923 13.268-.625 17.6a19.95 19.95 0 0 0 6.117 3.104 14.9 14.9 0 0 0 1.308-2.108 12.8 12.8 0 0 1-2.003-.966c.167-.126.329-.257.487-.392a.05.05 0 0 1 .052-.006c3.857 1.762 8.035 1.762 11.846 0a.05.05 0 0 1 .053.006c.158.135.32.266.487.392a12.8 12.8 0 0 1-2.003.966 14.9 14.9 0 0 0 1.308 2.108 19.94 19.94 0 0 0 6.117-3.104c.35-5.021-.596-9.376-3.529-13.23zM8.02 15.331c-1.182 0-2.153-1.086-2.153-2.419s.95-2.419 2.153-2.419c1.208 0 2.174 1.094 2.153 2.419 0 1.333-.95 2.419-2.153 2.419zm7.96 0c-1.182 0-2.153-1.086-2.153-2.419s.95-2.419 2.153-2.419c1.208 0 2.174 1.094 2.153 2.419 0 1.333-.945 2.419-2.153 2.419z"
+          />
+        </svg>
+      );
+    case "X":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="social-icon">
+          <path
+            fill="currentColor"
+            d="M4.5 3h4.6l4 5.4L17.6 3H21l-6.4 7.3L21.7 21h-4.6l-4.5-6.1L7.2 21H3.8l6.9-7.9L4.5 3Zm2.1 1.8 11.4 15.4h1.6L8.2 4.8H6.6Z"
+          />
+        </svg>
+      );
+    case "Instagram":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="social-icon">
+          <rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+          <circle cx="12" cy="12" r="3.3" fill="none" stroke="currentColor" strokeWidth="1.8" />
+          <circle cx="17" cy="7" r="1.1" fill="currentColor" />
+        </svg>
+      );
+    case "YouTube":
+      return (
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="social-icon">
+          <rect x="3" y="6.5" width="18" height="11" rx="4" fill="currentColor" opacity="0.18" />
+          <path fill="currentColor" d="M10 8.5 16 12l-6 3.5v-7Z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+};
+
 const LogoSVG = () => (
   <svg
     viewBox="0 0 297 346"
@@ -42,36 +84,32 @@ const style = `
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
   :root {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.04);
-    border-radius: 8px;
-    cursor: pointer;
-    padding: 6px;
+    --red: #e02020;
+    --red-dark: #a00000;
+    --red-glow: rgba(200,0,0,0.35);
   }
-  .hamburger .bar {
-    display: block;
-    width: 10px;
-    height: 2px;
-    background: #fff;
-    margin: 0;
-    border-radius: 2px;
-    transition: transform 220ms cubic-bezier(.2,.8,.2,1), opacity 180ms ease;
-    transform-origin: center;
-    transform: translateX(0) scaleX(1);
-  }
-  .hamburger .bar:nth-child(1) { transition-delay: 0ms; }
-  .hamburger .bar:nth-child(2) { transition-delay: 30ms; }
-  .hamburger .bar:nth-child(3) { transition-delay: 60ms; }
 
-  .hamburger.is-active .bar:nth-child(1) { transform: translateX(-6px) scaleX(1.15); transition-delay: 60ms; }
-  .hamburger.is-active .bar:nth-child(2) { transform: scaleX(1.05); transition-delay: 30ms; }
-  .hamburger.is-active .bar:nth-child(3) { transform: translateX(6px) scaleX(1.15); transition-delay: 0ms; }
+  html { scroll-behavior: smooth; }
+
+  .ye-root {
+    background: #070707;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* BG */
+  .bg-fixed { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .bg-orb { position: absolute; border-radius: 50%; }
+  .orb1 {
+    width:700px; height:700px;
+    background: radial-gradient(circle, rgba(200,0,0,0.18) 0%, transparent 70%);
+    top:-200px; right:-150px;
+  }
+  .orb2 {
+    width:500px; height:500px;
+    background: radial-gradient(circle, rgba(150,0,0,0.12) 0%, transparent 70%);
     bottom:100px; left:-150px;
   }
   .bg-grid {
@@ -142,16 +180,16 @@ const style = `
     cursor: pointer;
   }
   .hamburger .bar {
-    display: block;
-    width: 10px;
-    height: 2px;
-    background: #fff;
-    margin: 8px 0;
-    border-radius: 2px;
-    transition: opacity 0.12s ease, transform 0.12s ease;
+    display:block;
+    width:18px;
+    height:2px;
+    background:#fff;
+    margin:3px 0;
+    transition: transform 0.25s ease, opacity 0.2s ease;
   }
-  /* Keep the icon as three horizontal bars when active */
-  .hamburger.is-active .bar { transform: none; opacity: 1; }
+  .hamburger.is-active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.is-active .bar:nth-child(2) { opacity: 0; }
+  .hamburger.is-active .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
   .mobile-menu {
     display: none;
@@ -165,33 +203,22 @@ const style = `
     opacity: 0;
     pointer-events: none;
   }
-  .mobile-menu {
-    position: fixed;
-    inset: 62px 0 0 0;
-    z-index: 300;
-    background: rgba(7,7,7,0.96);
-    backdrop-filter: blur(10px);
-    padding: 2rem 1.5rem;
-    opacity: 0;
-    transform: translateY(-8px);
-    pointer-events: none;
-    visibility: hidden;
-    transition: opacity 220ms cubic-bezier(.2,.8,.2,1), transform 220ms cubic-bezier(.2,.8,.2,1);
-  }
   .mobile-menu.open {
+    display: block;
     opacity: 1;
-    transform: translateY(0);
     pointer-events: auto;
-    visibility: visible;
   }
+  .mobile-menu ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px; }
+  .mobile-menu a { font-family: 'Space Mono', monospace; font-size: 16px; color: #fff; text-decoration:none; padding: 12px 8px; border-radius: 8px; display:block; }
+  .mobile-menu a.active { color: var(--red); background: rgba(200,0,0,0.06); }
 
-  .mobile-menu ul li { opacity: 0; transform: translateY(8px); transition: opacity 220ms ease, transform 220ms ease; }
-  .mobile-menu.open ul li { opacity: 1; transform: translateY(0); }
-  .mobile-menu.open ul li:nth-child(1) { transition-delay: 60ms; }
-  .mobile-menu.open ul li:nth-child(2) { transition-delay: 90ms; }
-  .mobile-menu.open ul li:nth-child(3) { transition-delay: 120ms; }
-  .mobile-menu.open ul li:nth-child(4) { transition-delay: 150ms; }
-  .mobile-menu.open ul li:nth-child(5) { transition-delay: 180ms; }
+  /* HERO */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 92vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
     padding: 6rem 2rem 5rem;
   }
   .hero-logo-wrap {
@@ -606,6 +633,7 @@ const style = `
     color: rgba(255,255,255,0.45);
     transition: all 0.2s; text-decoration: none;
   }
+  .social-icon { width: 18px; height: 18px; display: block; }
   .social-btn:hover { border-color: rgba(200,0,0,0.4); color: var(--red); }
   .form-grid { display: flex; flex-direction: column; gap: 12px; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -680,6 +708,7 @@ const style = `
     font-size: 10px; color: rgba(255,255,255,0.38);
     text-decoration: none; transition: all 0.2s;
   }
+  .footer-social .social-icon { width: 15px; height: 15px; }
   .footer-social:hover { border-color: rgba(200,0,0,0.4); color: var(--red); }
   .footer-bottom {
     position: relative; z-index: 1;
@@ -1128,15 +1157,34 @@ export default function YouEsports() {
 
   /* ── Scroll nav highlight ── */
   useEffect(() => {
-    const handler = () => {
-      const sections = ["home", "about", "roster", "creators", "shop", "contact"];
-      for (const id of [...sections].reverse()) {
+    let frameId = 0;
+
+    const updateActiveNav = () => {
+      const scrollPosition = window.scrollY + 160;
+      for (const id of [...SECTION_IDS].reverse()) {
         const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 120) { setActiveNav(id); break; }
+        if (el && scrollPosition >= el.offsetTop) {
+          setActiveNav(id);
+          break;
+        }
+      }
+      frameId = 0;
+    };
+
+    const onScroll = () => {
+      if (!frameId) {
+        frameId = window.requestAnimationFrame(updateActiveNav);
       }
     };
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
+
+    updateActiveNav();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   const handleDeptClick = (i) => { setActiveDept(i); setSubject(depts[i].title); };
@@ -1511,7 +1559,9 @@ export default function YouEsports() {
                 <div className="follow-label">FOLLOW US</div>
                 <div className="socials">
                   {SOCIAL_LINKS.filter(s => s.href).map(s => (
-                    <a key={s.label} href={s.href} className="social-btn" target="_blank" rel="noopener noreferrer" aria-label={s.name}>{s.label}</a>
+                    <a key={s.label} href={s.href} className="social-btn" target="_blank" rel="noopener noreferrer" aria-label={s.name}>
+                      <SocialIcon name={s.name} />
+                    </a>
                   ))}
                 </div>
               </>
@@ -1582,7 +1632,9 @@ export default function YouEsports() {
           <h4>NETWORK</h4>
           <div className="footer-socials">
             {SOCIAL_LINKS.filter(s => s.href).map(s => (
-              <a key={s.label} href={s.href} className="footer-social" target="_blank" rel="noopener noreferrer" aria-label={s.name}>{s.label}</a>
+              <a key={s.label} href={s.href} className="footer-social" target="_blank" rel="noopener noreferrer" aria-label={s.name}>
+                <SocialIcon name={s.name} />
+              </a>
             ))}
           </div>
         </div>
